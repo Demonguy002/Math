@@ -60,7 +60,26 @@ function solve(){
  <button onclick="next()">Next Mission ➡️</button><button onclick="showDashboard()">Dashboard</button><button onclick="retry()">Run Again</button></div>`;
  document.getElementById("output").innerHTML=out;drawGraph(f,root);document.getElementById("graph").style.display="block";
  score+=10;xp+=5;streak++;save();toast("+10 score • +5 XP")}
-function retry(){solved=false;document.getElementById("output").innerHTML="";document.getElementById("graph").style.display="none"}
+function next(){
+  if(!set || set.length===0){
+    showDashboard();
+    return;
+  }
+  index++;
+  if(index >= set.length){
+    showDashboard();
+    toast("🎉 Level complete!");
+    return;
+  }
+  solved=false;
+  nextQ();
+}
+
+function retry(){
+  solved=false;
+  document.getElementById("output").innerHTML="";
+  document.getElementById("graph").style.display="none";
+}
 function drawGraph(f,root){
  const c=document.getElementById("graph"),ctx=c.getContext("2d"),w=c.width,h=c.height;ctx.clearRect(0,0,w,h);
  ctx.fillStyle="#010712";ctx.fillRect(0,0,w,h);ctx.font="12px Segoe UI";
